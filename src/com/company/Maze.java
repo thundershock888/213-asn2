@@ -1,10 +1,11 @@
 package com.company;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
-public class Maze {
+public class
+        Maze {
     public int mazeState = 0;
     private int relicCount = 0;
     private int numRelicsNeeded = 3;
@@ -19,9 +20,10 @@ public class Maze {
     public Maze() {
         generateMaze();
     }
-    public boolean checkValidInput(String nextMove){
+
+    public boolean checkValidInput(String nextMove) {//checks valid user input
         nextMove.toLowerCase();
-        if(!(nextMove.equals("w")||nextMove.equals("a")||nextMove.equals("s")||nextMove.equals("d")||nextMove.equals("c")||nextMove.equals("m")||nextMove.equals("?"))){
+        if (!(nextMove.equals("w") || nextMove.equals("a") || nextMove.equals("s") || nextMove.equals("d") || nextMove.equals("c") || nextMove.equals("m") || nextMove.equals("?"))) {
             System.out.println(nextMove + " is not a valid input, please try again");
 
             return false;
@@ -29,11 +31,11 @@ public class Maze {
         return true;
     }
 
-    public void movePlayer(Scanner s) {
-        if(mazeState == 0) {
+    public void movePlayer(Scanner s) {//moves player, also actrivates extra functions, ? c, m
+        if (mazeState == 0) {
             String nextMove = s.nextLine();
             //System.out.println(nextMove);
-            while(!checkValidInput(nextMove)){
+            while (!checkValidInput(nextMove)) {
                 nextMove = s.nextLine();
             }
 
@@ -56,7 +58,7 @@ public class Maze {
         }
     }
 
-    public void updateLocation(String nextMove) {
+    public void updateLocation(String nextMove) {//updates player locations
         int x = player.x;
         int y = player.y;
         if (nextMove.equals("d") && y + 1 < Constants.width - 2 && isEmpty(x, y + 1)) {
@@ -74,22 +76,22 @@ public class Maze {
             player.y--;
 
         }
-        for (Tile g:guardians
+        for (Tile g : guardians
         ) {
-            if(wouldKillPlayer(g.x, g.y)){
+            if (wouldKillPlayer(g.x, g.y)) {
                 System.out.println("You Touched a Guardian");
             }
 
         }
-        for (int i = 0; i< relics.size();i++) {
+        for (int i = 0; i < relics.size(); i++) {
             Tile r = relics.get(i);
-            if(wouldTouchRelic(r.x, r.y)){
+            if (wouldTouchRelic(r.x, r.y)) {
                 relics.remove(i);
-                if(relicCount == numRelicsNeeded){
-                    System.out.println("You won with "+ numRelicsNeeded+ " Relics! ");
+                if (relicCount == numRelicsNeeded) {
+                    System.out.println("You won with " + numRelicsNeeded + " Relics! ");
                     mazeState = 2;
                 }
-                placeObject(0,"relic");
+                placeObject(0, "relic");
                 System.out.println("You Got a Relic, total relics = " + relicCount);
             }
 
@@ -97,15 +99,17 @@ public class Maze {
 
     }
 
-    private boolean isEmpty(int x, int y) {
+    private boolean isEmpty(int x, int y) {//determines if a tile at given location is empty
+
 
         if (tileArr[x][y].type.equals("empty")) {
             return true;
         }
         return false;
     }
-    private boolean wouldTouchRelic(int x, int y){
-        if(player.x == x&& player.y == y){
+
+    private boolean wouldTouchRelic(int x, int y) {
+        if (player.x == x && player.y == y) {
             relicCount++;
             return true;
         }
@@ -113,75 +117,71 @@ public class Maze {
     }
 
 
-
-
-
-    public void printMaze() {
+    public void printMaze() {//prints maze, uses data stored in all the arrays to determine what/how to draw
         boolean printedGameObj = false;
         int x = player.x;
         int y = player.y;
-        for (int i = x-1; i <= x+1; i++) {
-            for (int j = y-1; j <= y+1; j++) {
+        for (int i = x - 1; i <= x + 1; i++) {
+            for (int j = y - 1; j <= y + 1; j++) {
                 tileArr[i][j].viewed = true;
             }
 
         }
 
-            for (int i = 0; i < Constants.height; i++) {
-                for (int j = 0; j < Constants.width; j++) {
-                    Tile tile = tileArr[i][j];
-                    if (tile.x == player.x && tile.y == player.y) {
-                        if(mazeState == 0){
+        for (int i = 0; i < Constants.height; i++) {
+            for (int j = 0; j < Constants.width; j++) {
+                Tile tile = tileArr[i][j];
+                if (tile.x == player.x && tile.y == player.y) {
+                    if (mazeState == 0) {
                         System.out.print("@");
                         printedGameObj = true;
-                        }else if (mazeState == 1){
-                            System.out.print("X");
-                            printedGameObj = true;
-                        }else if(mazeState == 2){
-                            System.out.print("W");
-                            printedGameObj = true;
-                        }
+                    } else if (mazeState == 1) {
+                        System.out.print("X");
+                        printedGameObj = true;
+                    } else if (mazeState == 2) {
+                        System.out.print("W");
+                        printedGameObj = true;
                     }
-                    for (Tile g : guardians
-                    ) {
-                        if (g.x == tile.x && g.y == tile.y && !printedGameObj) {
-                            System.out.print("!");
-                            printedGameObj = true;
-                        }
-
-                    }
-                    for (Tile r : relics
-                    ) {
-                        if (r.x == tile.x && r.y == tile.y && printedGameObj != true) {
-                            System.out.print("^");
-                            printedGameObj = true;
-                        }
-
-                    }
-                    if (!printedGameObj) {
-                        if (tile.viewed||revealToggle) {
-                            if (tile.getType().equals("wall")) {
-                                System.out.print("#");
-                            }
-                            if (tile.getType().equals("empty")) {
-                                System.out.print(".");
-                            }
-                        }else if (!printedGameObj){
-                            System.out.print(" ");
-                    }
-                    }
-                    printedGameObj = false;
                 }
+                for (Tile g : guardians
+                ) {
+                    if (g.x == tile.x && g.y == tile.y && !printedGameObj) {
+                        System.out.print("!");
+                        printedGameObj = true;
+                    }
 
-                System.out.println();
+                }
+                for (Tile r : relics
+                ) {
+                    if (r.x == tile.x && r.y == tile.y && printedGameObj != true) {
+                        System.out.print("^");
+                        printedGameObj = true;
+                    }
+
+                }
+                if (!printedGameObj) {
+                    if (tile.viewed || revealToggle) {
+                        if (tile.getType().equals("wall")) {
+                            System.out.print("#");
+                        }
+                        if (tile.getType().equals("empty")) {
+                            System.out.print(".");
+                        }
+                    } else if (!printedGameObj) {
+                        System.out.print(" ");
+                    }
+                }
+                printedGameObj = false;
             }
+
+            System.out.println();
+        }
         System.out.println("Relic In Possesion: " + relicCount);
         System.out.println("Relics Needed: " + numRelicsNeeded);
-        }
+    }
 
 
-
-    private void generateMaze() {
+    private void generateMaze() {//calls functions to generate a new maze
         clearListOfSquares();
         initArr();
         fillEdges();
@@ -193,7 +193,7 @@ public class Maze {
     }
 
 
-    public void moveGuardians() {
+    public void moveGuardians() {//moves gaurdians, inlcudes logic to not tackgrack and randomly decides where to go
         for (Tile g : guardians
         ) {
             ArrayList<Tile> avail;
@@ -222,9 +222,9 @@ public class Maze {
             }
 
         }
-        for (Tile g:guardians
-             ) {
-            if(wouldKillPlayer(g.x, g.y)){
+        for (Tile g : guardians
+        ) {
+            if (wouldKillPlayer(g.x, g.y)) {
                 System.out.println("Guardian Killed You");
             }
 
@@ -232,15 +232,16 @@ public class Maze {
 
 
     }
-    private boolean wouldKillPlayer(int x, int y){
-        if(x==player.x&&y==player.y){
+
+    private boolean wouldKillPlayer(int x, int y) {//determines if player should die to gaurdian
+        if (x == player.x && y == player.y) {
             mazeState = 1;
             return true;
         }
         return false;
     }
 
-    private ArrayList<Tile> findAvailableTiles(int x, int y) {
+    private ArrayList<Tile> findAvailableTiles(int x, int y) {//finds available tiles for gaurdian to take
         ArrayList<Tile> temp = new ArrayList<>();
         if (x > 0) {
             Tile t = tileArr[x - 1][y];
@@ -269,7 +270,7 @@ public class Maze {
         return temp;
     }
 
-    private void addGameObjects() {
+    private void addGameObjects() {//adds in innitial gamejobjects like relics
 
         //Tile finish = new Tile(Constants.width-1, Constants.height-1, "finish");
 
@@ -280,11 +281,11 @@ public class Maze {
 
     }
 
-    private void placeObject(int num, String type) {
+    private void placeObject(int num, String type) {//places relics/gaurdiands into the map
         while (num >= 0) {
             int x = betterRandom(0, Constants.height);
             int y = betterRandom(0, Constants.width);
-            while (!(isEmpty(x, y))||(player.x == x&&player.y == y)){
+            while (!(isEmpty(x, y)) || (player.x == x && player.y == y)) {
                 x = betterRandom(0, Constants.height);
                 y = betterRandom(0, Constants.width);
             }
@@ -301,11 +302,11 @@ public class Maze {
         }
     }
 
-    private int betterRandom(int low, int up) {
+    private int betterRandom(int low, int up) {//helper for better random
         return (int) (((Math.random() * up) + low));
     }
 
-    private void makeSomeCycles(int numCycles) {
+    private void makeSomeCycles(int numCycles) {//makes some cycles to make maze better
         while (numCycles > 0) {
             int x = 1 + (int) (Math.random() * (Constants.height - 3));
             int y = 1 + (int) (Math.random() * (Constants.width - 3));
@@ -321,7 +322,7 @@ public class Maze {
 
     }
 
-    private int getWallAdjacentCount(int x, int y) {
+    private int getWallAdjacentCount(int x, int y) {//helper for generation logic
         int wallAdjacentCount = 0;
         if (tileArr[x - 1][y].type.equals("wall")) {
             wallAdjacentCount++;
@@ -338,7 +339,7 @@ public class Maze {
         return wallAdjacentCount;
     }
 
-    private void makeTendrils() {
+    private void makeTendrils() {//generated walls of the maze, uses many helpers for logic
         int failed = 0;
         int wallstart = 20;
         while (failed < 20000) {
@@ -354,7 +355,7 @@ public class Maze {
         listOfSquares.clear();
     }
 
-    private void createTentril(int wallStart) {
+    private void createTentril(int wallStart) {//creates the tendrils, logic for which way they go, how to make 2x2 when possible, ect.
         int x = 0;
         int y = 0;
         if (wallStart > 0) {
@@ -428,7 +429,7 @@ public class Maze {
 
     }
 
-    private boolean checkValidSquare(int x, int y, int direction) {
+    private boolean checkValidSquare(int x, int y, int direction) {//checks if a square could be valid wall
         if (x < 1 || x > Constants.height - 2) {
             return false;
         }
@@ -486,12 +487,12 @@ public class Maze {
         }
     }
 
-    private void fillEdges() {
+    private void fillEdges() {//fills in initiall walls of the maze.
         for (int i = 0; i < Constants.height; i++) {
             tileArr[i][0].type = "wall";
             tileArr[i][0].viewed = true;
             tileArr[i][Constants.width - 1].type = "wall";
-            tileArr[i][Constants.width-1].viewed = true;
+            tileArr[i][Constants.width - 1].viewed = true;
             listOfSquares.add(tileArr[i][0]);
             listOfSquares.add(tileArr[i][Constants.width - 1]);
             listOfEdges.add(tileArr[i][0]);
@@ -510,14 +511,32 @@ public class Maze {
         }
 
     }
-    public boolean checkWinConditions(){
-        if(mazeState == 2){
+
+    public boolean checkWinConditions() {//checks id won or lost
+        if (mazeState == 2) {
             System.out.println("you win");
             return true;
-        }else if(mazeState == 1){
+        } else if (mazeState == 1) {
             System.out.println("you lost");
             return true;
         }
         return false;
-}}
+    }
+
+    public void drawMazeOnCanvas(Canvas canvas) {
+        for (int i = 0; i < Constants.height; i++) {
+            for (int j = 0; j < Constants.width; j++) {
+                Tile tile = tileArr[i][j];
+                Color black = new Color(0, 0, 0);
+                Color white = new Color(255, 255, 255);
+                if (tile.getType().equals("empty")) {
+                    canvas.setCellColor(i, j, white);
+                } else {
+                    canvas.setCellColor(i, j, black);
+                }
+
+            }
+        }
+    }
+}
 

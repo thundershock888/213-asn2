@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+class Tile{
+ - String type
+ - int x
+ - int y
+ -int lastXPos
+
+}
