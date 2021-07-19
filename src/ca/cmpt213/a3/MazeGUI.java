@@ -1,4 +1,8 @@
-package com.company;
+package ca.cmpt213.a3;
+
+import ca.cmpt213.a3.UI.PicturePanel;
+import ca.cmpt213.a3.shapes.MazeShape;
+import ca.cmpt213.a3.Maze.Maze;
 
 import javax.swing.*;
 import java.util.ArrayList;

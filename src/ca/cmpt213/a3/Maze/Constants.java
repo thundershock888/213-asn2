@@ -1,4 +1,4 @@
-package com.company;
+package ca.cmpt213.a3.Maze;
 
 public class Constants {
     public static final int width = 21;

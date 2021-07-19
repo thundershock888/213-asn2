@@ -1,4 +1,6 @@
-package com.company;
+package ca.cmpt213.a3.UI;
+
+import ca.cmpt213.a3.UI.Canvas;
 
 import java.awt.Color;
 import java.awt.Component;

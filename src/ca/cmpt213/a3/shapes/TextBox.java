@@ -1,10 +1,12 @@
-package com.company;
+package ca.cmpt213.a3.shapes;
 
+
+import ca.cmpt213.a3.UI.Canvas;
 
 public class TextBox extends Rectangle {
     String message;
 
-    TextBox(int x1, int y1, int x2, int y2, String msg) {
+    public TextBox(int x1, int y1, int x2, int y2, String msg) {
         super(x1, y1, x2, y2);
         this.message = msg;
     }
@@ -41,12 +43,6 @@ public class TextBox extends Rectangle {
 
     }
 
-    @Override
-    public boolean isBorder(int x, int y) {
-        if(x == x1|| y == y1 || x == x2-1|| y== y2-1){
-            return true;
-        }
-        return false;
-    }
+
 
 }

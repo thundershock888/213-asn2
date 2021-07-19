@@ -1,4 +1,4 @@
-package com.company;
+package ca.cmpt213.a3.UI;
 
 import java.awt.Color;
 

@@ -1,4 +1,9 @@
-package com.company;
+package ca.cmpt213.a3;
+
+import ca.cmpt213.a3.UI.PicturePanel;
+import ca.cmpt213.a3.shapes.Pyramid;
+import ca.cmpt213.a3.shapes.Rectangle;
+import ca.cmpt213.a3.shapes.TextBox;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -24,12 +29,12 @@ public class MainGUI {
 		// Select the pictures to test:
 		// (Comment / Uncomment these calls as you like during testing)
 		List<PicturePanel> pictures = new ArrayList<>();
-		pictures.add(makeMixedPicture());
+		//pictures.add(makeMixedPicture());
 	pictures.add(makePyramidsPicture());
 	pictures.add(makeRectanglesPicture());
-		pictures.add(makeTextBoxesPicture());
-//		pictures.add(makeMixedPicture());
-//		pictures.add(makeFrontAndBackPicture());
+		//pictures.add(makeTextBoxesPicture());
+	pictures.add(makeMixedPicture());
+		pictures.add(makeFrontAndBackPicture());
 
 		// Show picture on graphical UI
 		// (You should understand all of this!)
@@ -63,6 +68,7 @@ public class MainGUI {
 
 	private static void testPyramidRow1(PicturePanel picture) {
 		Pyramid p1 = new Pyramid(0, 0, 1, 1);
+		p1.setBorderChar('*');
 		p1.setColor(Color.MAGENTA);
 		picture.addFront(p1);
 
@@ -72,13 +78,16 @@ public class MainGUI {
 		picture.addFront(p2);
 
 		Pyramid p3 = new Pyramid(10, 0, 7, 4);
+		p3.setBorderChar('*');
 		p3.setColor(Color.RED);
 		picture.addFront(p3);
 
 		Pyramid p4 = new Pyramid(20, 0, 6, 4);
+		p4.setBorderChar('*');
 		picture.addFront(p4);
 
 		Pyramid p5 = new Pyramid(30, 0, 12, 6);
+		p5.setBorderChar('*');
 		p5.setColor(Color.BLUE);
 		picture.addFront(p5);
 	}
@@ -127,13 +136,16 @@ public class MainGUI {
 		picture.addFront(r2);
 
 		Rectangle r3 = new Rectangle(10, 0, 3, 3);
+		r2.setBorderChar('*');
 		r3.setColor(Color.RED);
 		picture.addFront(r3);
 
 		Rectangle r4 = new Rectangle(15, 0, 4, 4);
+		r2.setBorderChar('*');
 		picture.addFront(r4);
 
 		Rectangle r5 = new Rectangle(27, 0, 35, 18);
+		r2.setBorderChar('*');
 		r5.setColor(Color.ORANGE);
 		picture.addFront(r5);
 	}

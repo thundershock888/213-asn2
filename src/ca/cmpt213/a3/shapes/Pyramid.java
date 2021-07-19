@@ -1,8 +1,10 @@
-package com.company;
+package ca.cmpt213.a3.shapes;
+
+import ca.cmpt213.a3.UI.Canvas;
 
 public class Pyramid extends ShapeImp{
 
-    Pyramid(int x1, int y1, int x2, int y2) {
+    public Pyramid(int x1, int y1, int x2, int y2) {
         super(x1, y1, x2, y2);
     }
 

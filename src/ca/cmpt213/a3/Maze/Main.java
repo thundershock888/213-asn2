@@ -1,6 +1,5 @@
-package com.company;
+package ca.cmpt213.a3.Maze;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {

@@ -1,6 +1,9 @@
-package com.company;
+package ca.cmpt213.a3;
 
 
+
+import ca.cmpt213.a3.UI.Canvas;
+import ca.cmpt213.a3.UI.CanvasIcon;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package com.company;
+package ca.cmpt213.a3.Maze;
 
 public class Tile {
     int x;

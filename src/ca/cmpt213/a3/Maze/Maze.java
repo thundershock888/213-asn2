@@ -1,4 +1,6 @@
-package com.company;
+package ca.cmpt213.a3.Maze;
+
+import ca.cmpt213.a3.UI.Canvas;
 
 import java.awt.*;
 import java.util.ArrayList;

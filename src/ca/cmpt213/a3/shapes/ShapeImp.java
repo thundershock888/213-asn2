@@ -1,21 +1,23 @@
-package com.company;
+package ca.cmpt213.a3.shapes;
+
+import ca.cmpt213.a3.UI.Canvas;
 
 import java.awt.*;
 
-public abstract class ShapeImp implements Shape{
+public abstract class ShapeImp implements Shape {
     int x1;
     int x2;
     int y1;
     int y2;
     char borderChar;
-    Color color;
+    Color color = new Color(255,165,0);
 
     ShapeImp(int x1, int y1, int x2, int y2) {
         this.x1 = x1;
         this.x2 = x1+x2;
         this.y1 = y1;
         this.y2 = y1+y2;
-        //borderChar = ' ';
+        borderChar = '*';
 
 
     }
