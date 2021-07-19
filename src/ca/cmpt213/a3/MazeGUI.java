@@ -3,6 +3,7 @@ package ca.cmpt213.a3;
 import ca.cmpt213.a3.UI.PicturePanel;
 import ca.cmpt213.a3.shapes.MazeShape;
 import ca.cmpt213.a3.Maze.Maze;
+import ca.cmpt213.a3.shapes.TextBox;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class MazeGUI {
      * Application to display the test "pictures" to the UI.
      */
     public static void main(String[] args) {
+
         Maze maze = new Maze();
         maze.printMaze();
         MazeShape mazepattern = new MazeShape(0,0,0,0,maze);

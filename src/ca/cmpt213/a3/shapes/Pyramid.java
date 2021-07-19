@@ -35,6 +35,9 @@ public class Pyramid extends ShapeImp{
                 if(isBorder(i,j)){
                     canvas.setCellText(i,j,borderChar);
                 }
+                if(isInside(i,j)){
+                    canvas.setCellText(i,j,' ');
+                }
                 }
             }
 

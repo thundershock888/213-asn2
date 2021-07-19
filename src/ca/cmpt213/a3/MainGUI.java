@@ -30,10 +30,10 @@ public class MainGUI {
 		// (Comment / Uncomment these calls as you like during testing)
 		List<PicturePanel> pictures = new ArrayList<>();
 		//pictures.add(makeMixedPicture());
-	pictures.add(makePyramidsPicture());
-	pictures.add(makeRectanglesPicture());
-		//pictures.add(makeTextBoxesPicture());
-	pictures.add(makeMixedPicture());
+	//pictures.add(makePyramidsPicture());
+	//pictures.add(makeRectanglesPicture());
+		pictures.add(makeTextBoxesPicture());
+		//pictures.add(makeMixedPicture());
 		pictures.add(makeFrontAndBackPicture());
 
 		// Show picture on graphical UI
